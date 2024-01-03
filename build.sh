@@ -3,7 +3,7 @@ echo ""
 echo "LineageOS 18.x Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-git clone https://github.com/xc112lg/lineage_patches_leaos  -b lineage-18.1
+git clone https://github.com/xc112lg/lineage_patches_leaos  -b test
 git clone https://github.com/iceows/treble_experimentations
 
 if [ $# -lt 1 ]
