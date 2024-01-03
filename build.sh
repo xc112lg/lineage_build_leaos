@@ -15,8 +15,7 @@ fi
 
 MODE=${1}
 NOSYNC=false
-PERSONAL=false
-ICEOWS=true
+
 for var in "${@:2}"
 do
     if [ ${var} == "nosync" ]
