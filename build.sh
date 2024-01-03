@@ -52,7 +52,7 @@ prep_build() {
 	echo ""
 
 	echo "Setting up build environment"
-	source build/envsetup.sh &> /dev/null
+	source build/envsetup.sh
 	mkdir -p ./build-output
 	echo ""
 }
@@ -114,7 +114,7 @@ then
     echo "ATTENTION: syncing/patching skipped!"
     echo ""
     echo "Setting up build environment"
-    source build/envsetup.sh &> /dev/null
+    source build/envsetup.sh
     echo ""
 else
     prep_build
