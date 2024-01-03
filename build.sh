@@ -29,15 +29,7 @@ echo "Building with NoSync : $NOSYNC - Mode : ${MODE}"
 
 
 
-# Abort early on error
-set -eE
-trap '(\
-echo;\
-echo \!\!\! An error happened during script execution;\
-echo \!\!\! Please check console output for bad sync,;\
-echo \!\!\! failed patch application, etc.;\
-echo\
-)' ERR
+
 
 START=`date +%s`
 BUILD_DATE="$(date +%Y%m%d)"
