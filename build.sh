@@ -37,7 +37,7 @@ WITHOUT_CHECK_API=true
 WITH_SU=true
 
 
-repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --git-lfs
+repo init -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
 
 
 prep_build() {
@@ -48,7 +48,7 @@ prep_build() {
 	echo ""
 
 	echo "Syncing repos"
-	repo sync -j$(nproc --all) -c -q --force-sync --no-tags --no-clone-bundle --optimized-fetch --prune
+	repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
 
 	echo ""
 
