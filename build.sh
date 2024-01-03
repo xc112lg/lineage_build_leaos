@@ -3,7 +3,8 @@ echo ""
 echo "LineageOS 18.x Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-sleep 5
+git clone https://github.com/xc112lg/lineage_patches_leaos  -b lineage-18.1
+git clone https://github.com/iceows/treble_experimentations
 
 if [ $# -lt 1 ]
 then
@@ -42,7 +43,7 @@ START=`date +%s`
 BUILD_DATE="$(date +%Y%m%d)"
 WITHOUT_CHECK_API=true
 WITH_SU=true
-export OUT_DIR=/home/iceows/build/Los18.1
+
 
 repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --git-lfs
 
