@@ -47,7 +47,7 @@ prep_build() {
 	echo ""
 
 	echo "Syncing repos"
-	repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
+	repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j2
 
 	echo ""
 
