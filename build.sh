@@ -54,7 +54,7 @@ prep_build() {
 
 	echo "Setting up build environment"
 	source build/envsetup.sh &> /dev/null
-	mkdir -p ~/build-output
+	mkdir -p ./build-output
 	echo ""
 }
 
@@ -89,10 +89,10 @@ build_device() {
     then
         lunch lineage_arm64-userdebug
         make -j$(nproc --all) systemimage
-        mv $OUT/system.img ~/build-output/lineage-18.1-$BUILD_DATE-UNOFFICIAL-arm64$(${PERSONAL} && echo "-personal" || echo "").img
+        mv $OUT/system.img ./build-output/lineage-18.1-$BUILD_DATE-UNOFFICIAL-arm64$(${PERSONAL} && echo "-personal" || echo "").img
     else
         brunch ${1}
-        mv $OUT/lineage-*.zip ~/build-output/lineage-18.1-$BUILD_DATE-UNOFFICIAL-${1}$($PERSONAL && echo "-personal" || echo "").zip
+        mv $OUT/lineage-*.zip ./build-output/lineage-18.1-$BUILD_DATE-UNOFFICIAL-${1}$($PERSONAL && echo "-personal" || echo "").zip
     fi
 }
 
@@ -107,7 +107,7 @@ build_treble() {
     make installclean
     make -j$(nproc --all) systemimage
     #make vndk-test-sepolicy
-    mv $OUT/system.img ~/build-output/LeaOS-18.1-$BUILD_DATE-${TARGET}.img
+    mv $OUT/system.img ./build-output/LeaOS-18.1-$BUILD_DATE-${TARGET}.img
 }
 
 if ${NOSYNC}
@@ -137,7 +137,7 @@ do
     echo "Starting $(${PERSONAL} && echo "personal " || echo "")build for ${MODE} ${var}"
     build_${MODE} ${var}
 done
-ls ~/build-output | grep 'LeaOS' || true
+ls ./build-output | grep 'LeaOS' || true
 
 END=`date +%s`
 ELAPSEDM=$(($(($END-$START))/60))
