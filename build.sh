@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ""
-echo "LineageOS 20.x Unified Buildbot - LeaOS version"
+echo "cRDOID 18.1 Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
 
@@ -69,6 +69,8 @@ prep_build() {
 
     echo "Setting up build environment"
     source build/envsetup.sh
+    	mkdir -p ./build-output
+
     echo ""
 
 
@@ -133,7 +135,7 @@ build_treble() {
     lunch ${TARGET}-userdebug
     make installclean
     make -j$(nproc --all) systemimage
-    mv $OUT/system.img ./build-output/LeaOS-20.0-$BUILD_DATE-${TARGET}.img
+    mv $OUT/system.img ./build-output/CRDroid-$BUILD_DATE-${TARGET}.img
 }
 
 if ${NOSYNC}
