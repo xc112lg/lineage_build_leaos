@@ -97,7 +97,7 @@ prep_device() {
 }
 
 prep_treble() {
-
+:
 }
 
 finalize_device() {
