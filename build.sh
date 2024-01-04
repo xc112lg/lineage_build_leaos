@@ -1,9 +1,9 @@
 #!/bin/bash
 echo ""
-echo "LineageOS 18.x Unified Buildbot - LeaOS version"
+echo "LineageOS 20.x Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-sleep 5
+
 
 if [ $# -lt 1 ]
 then
@@ -12,10 +12,16 @@ then
     exit 1
 fi
 
+
 MODE=${1}
+if [ ${MODE} != "device" ] && [ ${MODE} != "treble" ]
+then
+    echo "Invalid mode - exiting"
+    echo ""
+    exit 1
+fi
+
 NOSYNC=false
-PERSONAL=false
-ICEOWS=true
 for var in "${@:2}"
 do
     if [ ${var} == "nosync" ]
@@ -25,8 +31,6 @@ do
 done
 
 echo "Building with NoSync : $NOSYNC - Mode : ${MODE}"
-
-
 
 # Abort early on error
 set -eE
@@ -38,31 +42,38 @@ echo \!\!\! failed patch application, etc.;\
 echo\
 )' ERR
 
-START=`date +%s`
-BUILD_DATE="$(date +%Y%m%d)"
+
 WITHOUT_CHECK_API=true
 WITH_SU=true
-export OUT_DIR=/home/iceows/build/Los18.1
-
-repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --git-lfs
+START=`date +%s`
+BUILD_DATE="$(date +%Y%m%d)"
 
 
 prep_build() {
-	echo "Preparing local manifests"
-	rm -rf .repo/local_manifests
-	mkdir -p .repo/local_manifests
-	cp ./lineage_build_leaos/local_manifests_leaos/*.xml .repo/local_manifests
-	echo ""
+    echo "Preparing local manifests"
+    mkdir -p .repo/local_manifests
 
-	echo "Syncing repos"
-	repo sync -j$(nproc --all) -c -q --force-sync --no-tags --no-clone-bundle --optimized-fetch --prune
+    
+    if [ ${MODE} == "device" ]
+    then
+       cp ./lineage_build_leaos/local_manifests_leaoss/*.xml .repo/local_manifests
+    else
+       cp ./lineage_build_leaos/local_manifests_leaos/*.xml .repo/local_manifests
+    fi
+    
+    echo ""
+    
+    echo "Syncing repos"
+    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+    echo ""
 
-	echo ""
+    echo "Setting up build environment"
+    source build/envsetup.sh
+    echo ""
 
-	echo "Setting up build environment"
-	source build/envsetup.sh &> /dev/null
-	mkdir -p ~/build-output
-	echo ""
+
+
+
 }
 
 apply_patches() {
@@ -71,12 +82,21 @@ apply_patches() {
 }
 
 prep_device() {
-    :
+
+    # EMUI 8
+    # cd hardware/lineage/compat
+    # git fetch https://github.com/LineageOS/android_hardware_lineage_compat refs/changes/13/361913/9
+    # git cherry-pick FETCH_HEAD
+    # cd ../../../
+
+    # EMUI 9
+    unzip -o ./vendor/huawei/hi6250-9-common/proprietary/vendor/firmware/isp_dts.zip -d ./vendor/huawei/hi6250-9-common/proprietary/vendor/firmware
+    # EMUI 8
+    unzip -o ./vendor/huawei/hi6250-8-common/proprietary/vendor/firmware/isp_dts.zip -d ./vendor/huawei/hi6250-8-common/proprietary/vendor/firmware
 }
 
 prep_treble() {
-    echo "Applying patch treble prerequisite and phh"
-
+:
 }
 
 finalize_device() {
@@ -92,15 +112,15 @@ finalize_treble() {
 }
 
 build_device() {
-    if [ ${1} == "arm64" ]
-    then
-        lunch lineage_arm64-userdebug
-        make -j$(nproc --all) systemimage
-        mv $OUT/system.img ~/build-output/lineage-18.1-$BUILD_DATE-UNOFFICIAL-arm64$(${PERSONAL} && echo "-personal" || echo "").img
-    else
+
+      	# croot
+      	#TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
+      	#export TEMPORARY_DISABLE_PATH_RESTRICTIONS
+      	#breakfast ${1} 
+      	#mka bootimage 2>&1 | tee make_anne.log 
         brunch ${1}
-        mv $OUT/lineage-*.zip ~/build-output/lineage-18.1-$BUILD_DATE-UNOFFICIAL-${1}$($PERSONAL && echo "-personal" || echo "").zip
-    fi
+        mv $OUT/lineage-*.zip ./build-output/LeaOS-OSS-20.0-$BUILD_DATE-${1}.zip
+
 }
 
 build_treble() {
@@ -113,8 +133,7 @@ build_treble() {
     lunch ${TARGET}-userdebug
     make installclean
     make -j$(nproc --all) systemimage
-    #make vndk-test-sepolicy
-    mv $OUT/system.img ~/build-output/LeaOS-18.1-$BUILD_DATE-${TARGET}.img
+    mv $OUT/system.img ./build-output/LeaOS-20.0-$BUILD_DATE-${TARGET}.img
 }
 
 if ${NOSYNC}
@@ -122,18 +141,33 @@ then
     echo "ATTENTION: syncing/patching skipped!"
     echo ""
     echo "Setting up build environment"
-    source build/envsetup.sh &> /dev/null
+    source build/envsetup.sh
     echo ""
+
 else
+    echo "Prep build" 
     prep_build
+    prep_${MODE}
+    
+    echo "Applying patches"    
+    
+    if [ ${MODE} == "device" ]
+    then
+    	apply_patches patches_device
+    	apply_patches patches_device_iceows
+    else
+ prep_build
     echo "Applying patches"
     prep_treble
     apply_patches lineage
     apply_patches generic
     apply_patches personal
     finalize_treble
+    fi
+    finalize_${MODE}
     echo ""
 fi
+
 
 for var in "${@:2}"
 do
@@ -141,10 +175,10 @@ do
     then
         continue
     fi
-    echo "Starting $(${PERSONAL} && echo "personal " || echo "")build for ${MODE} ${var}"
+    echo "Starting personal " || echo " build for ${MODE} ${var}"
     build_${MODE} ${var}
 done
-ls ~/build-output | grep 'LeaOS' || true
+
 
 END=`date +%s`
 ELAPSEDM=$(($(($END-$START))/60))
