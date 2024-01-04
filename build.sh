@@ -70,7 +70,7 @@ prep_build() {
 
     echo "Setting up build environment"
     source build/envsetup.sh
-    	mkdir -p ./build-output
+
 
     echo ""
 
@@ -136,7 +136,7 @@ build_treble() {
     lunch ${TARGET}-userdebug
     make installclean
     make -j$(nproc --all) systemimage
-    mv $OUT/system.img ./build-output/CRDroid-$BUILD_DATE-${TARGET}.img
+
 }
 
 if ${NOSYNC}
