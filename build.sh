@@ -3,7 +3,8 @@ echo ""
 echo "cRDOID 18.1 Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-
+git clone https://github.com/iceows/treble_experimentations
+git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
 
 if [ $# -lt 1 ]
 then
