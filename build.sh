@@ -102,6 +102,9 @@ finalize_device() {
 
 finalize_treble() {
     rm -f device/*/sepolicy/common/private/genfs_contexts
+    rm -f packages/apps/Settings/res/xml/my_device_info.xml.orig
+    rm -f packages/apps/Settings/res/xml/sound_settings.xml.orig
+    rm -f frameworks/base/packages/SystemUI/res/values/lineage_config.xml.orig
     cd device/phh/treble
     git clean -fdx
     bash generate.sh lineage
