@@ -3,7 +3,7 @@ echo ""
 echo "LineageOS 20.x Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-sleep 5
+
 
 if [ $# -lt 1 ]
 then
@@ -68,8 +68,7 @@ prep_build() {
     echo ""
 
     echo "Setting up build environment"
-    source build/envsetup.sh &> /dev/null
-    mkdir -p ./build-output
+    source build/envsetup.sh
     echo ""
 
 
@@ -126,12 +125,13 @@ build_device() {
 
 build_treble() {
     case "${1}" in
-        ("64VN") TARGET=arm64_bvN;;
-        ("64VS") TARGET=arm64_bvS;;
-        ("64GN") TARGET=arm64_bgN;;
+        ("64BVS") TARGET=treble_arm64_bvS;;
+        ("64BVZ") TARGET=treble_arm64_bvZ;;
+        ("64BVN") TARGET=treble_arm64_bvN;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
-    lunch lineage_${TARGET}-userdebug
+    lunch ${TARGET}-userdebug
+    make installclean
     make -j$(nproc --all) systemimage
     mv $OUT/system.img ./build-output/LeaOS-20.0-$BUILD_DATE-${TARGET}.img
 }
@@ -141,7 +141,7 @@ then
     echo "ATTENTION: syncing/patching skipped!"
     echo ""
     echo "Setting up build environment"
-    source build/envsetup.sh &> /dev/null
+    source build/envsetup.sh
     echo ""
 
 else
@@ -156,7 +156,7 @@ else
     	apply_patches patches_device
     	apply_patches patches_device_iceows
     else
-    prep_build
+ prep_build
     echo "Applying patches"
     prep_treble
     apply_patches lineage
@@ -178,7 +178,7 @@ do
     echo "Starting personal " || echo " build for ${MODE} ${var}"
     build_${MODE} ${var}
 done
-ls ./build-output | grep 'LeaOS' || true
+
 
 END=`date +%s`
 ELAPSEDM=$(($(($END-$START))/60))
