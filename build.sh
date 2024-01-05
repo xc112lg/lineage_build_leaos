@@ -59,8 +59,9 @@ prep_build() {
     echo ""
     
     echo "Syncing repos"
-    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
-    echo ""
+    #repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+    repo sync -c --force-sync --no-clone-bundle --no-tags -j6    
+echo ""
 
     echo "Setting up build environment"
     source build/envsetup.sh
