@@ -104,7 +104,7 @@ finalize_device() {
 finalize_treble() {
     rm -f device/*/sepolicy/common/private/genfs_contexts
     rm -f frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
-    cp PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid
+    cp ./lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid
     #rm -f frameworks/base/packages/SystemUI/res/values/lineage_config.xml.orig
     cd device/phh/treble
     git clean -fdx
@@ -157,7 +157,7 @@ else
     	apply_patches patches_device
     	apply_patches patches_device_iceows
     else
- prep_build
+ #prep_build
     echo "Applying patches"
     prep_treble
     apply_patches lineage
