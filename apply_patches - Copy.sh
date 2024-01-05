@@ -11,14 +11,12 @@ for project in "$patches"/*; do
     [ "$p" == build ] && p=build/make
     [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay
     [ "$p" == vendor/partner/gms ] && p=vendor/partner_gms
-    [ "$p" == external/harfbuzz/ng ] && p=external/harfbuzz_ng
+        [ "$p" == external/harfbuzz/ng ] && p=external/harfbuzz_ng
     pushd "$p"
     git clean -fdx; git reset --hard
     for patch in "$patches"/$(basename "$project")/*.patch; do
         if git apply --check "$patch"; then
             git am "$patch"
-            # Remove .orig files after successful patch application
-            find . -name '*.orig' -delete
         else
             echo "Reverting changes from $patch"
             git reset --hard HEAD # Reset changes from previous patch
@@ -26,8 +24,6 @@ for project in "$patches"/*; do
                 patch -f -p1 < "$patch"
                 git add -u
                 git commit -m "Reverted changes from failed patch: $(basename "$patch")"
-                # Remove .orig files after successful revert
-                find . -name '*.orig' -delete
             else
                 echo "Failed applying $patch"
                 failed_patches+=("$patch") # Store failed patch
