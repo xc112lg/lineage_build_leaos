@@ -128,7 +128,7 @@ build_treble() {
     case "${1}" in
         ("64BVS") TARGET=treble_arm64_bvS;;
         ("64BVZ") TARGET=treble_arm64_bvZ;;
-        ("64BVN") TARGET=treble_arm64_avN;;
+        ("64BVN") TARGET=treble_arm64_bvN;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
     lunch ${TARGET}-userdebug
