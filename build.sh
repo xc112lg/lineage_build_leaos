@@ -103,8 +103,7 @@ finalize_device() {
 
 finalize_treble() {
     rm -f device/*/sepolicy/common/private/genfs_contexts
-    rm -f frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
-    cp ./lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid
+
     #rm -f frameworks/base/packages/SystemUI/res/values/lineage_config.xml.orig
     cd device/phh/treble
     git clean -fdx
@@ -132,8 +131,26 @@ build_treble() {
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
     lunch ${TARGET}-userdebug
-    make installclean
+cd frameworks/base/
+git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-7
+git cherry-pick 052774c602244a6e8921fa11ef1c911907e00d59
+cd ../../
     make -j$(nproc --all) systemimage
+find out/target/product/*/ -type f -name "*.img" -execdir bash -c 'mv "$1" "${1%.img}_newname.img"' bash {} \;
+cd frameworks/base/
+git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-7
+git cherry-pick 3f96b0f605d9a970d1ad459161d3b0fbfd275b08
+cd ../../
+    make -j$(nproc --all) systemimage
+find out/target/product/*/ -type f -name "*.img" -execdir bash -c 'mv "$1" "${1%.img}_newname.img"' bash {} \;
+cd frameworks/base/
+git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-7
+git cherry-pick 3ae1e19a23b47372be72a63489e0fa1590bd7c52
+cd ../../
+    make -j$(nproc --all) systemimage
+find out/target/product/*/ -type f -name "*.img" -execdir bash -c 'mv "$1" "${1%.img}_newname.img"' bash {} \;
+
+
 
 }
 
