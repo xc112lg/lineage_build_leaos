@@ -130,7 +130,7 @@ build_treble() {
         ("64BVN") TARGET=treble_arm64_bvN;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
-
+rm out/target/product/*/*.img
 cd frameworks/base/
 git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-7
 git cherry-pick 052774c602244a6e8921fa11ef1c911907e00d59
