@@ -132,12 +132,25 @@ build_treble() {
     esac
 rm out/target/product/*/*.img
 cd frameworks/base/
-git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-9
-git cherry-pick 7ab69aeae47d813bd2058ab8e2274852bd125a4b
+git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-7
+git cherry-pick 052774c602244a6e8921fa11ef1c911907e00d59
 cd ../../
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
-
+find out/target/product/*/ -type f -name "*.img" -execdir bash -c 'count=1; while [ -f "${1%.img}_newname_${count}.img" ]; do ((count++)); done; mv "$1" "${1%.img}_newname_${count}.img"' bash {} \;
+cd frameworks/base/
+git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-7
+git cherry-pick 3f96b0f605d9a970d1ad459161d3b0fbfd275b08
+cd ../../
+    lunch ${TARGET}-userdebug
+    make -j$(nproc --all) systemimage
+find out/target/product/*/ -type f -name "*.img" -execdir bash -c 'count=1; while [ -f "${1%.img}_newname_${count}.img" ]; do ((count++)); done; mv "$1" "${1%.img}_newname_${count}.img"' bash {} \;
+cd frameworks/base/
+git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-7
+git cherry-pick 3ae1e19a23b47372be72a63489e0fa1590bd7c52
+cd ../../
+    lunch ${TARGET}-userdebug
+    make -j$(nproc --all) systemimage
 
 
 
