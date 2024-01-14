@@ -132,8 +132,8 @@ build_treble() {
     esac
 rm out/target/product/*/*.img
 #cd frameworks/base/
-#git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-9
-#git cherry-pick 7ab69aeae47d813bd2058ab8e2274852bd125a4b
+#git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-11
+#git cherry-pick d3f9f23d678dbfd834c70ef08ae2e742e2754dad
 #cd ../../
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
