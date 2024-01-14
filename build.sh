@@ -131,10 +131,10 @@ build_treble() {
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 rm out/target/product/*/*.img
-cd frameworks/base/
-git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-9
-git cherry-pick 7ab69aeae47d813bd2058ab8e2274852bd125a4b
-cd ../../
+#cd frameworks/base/
+#git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-9
+#git cherry-pick 7ab69aeae47d813bd2058ab8e2274852bd125a4b
+#cd ../../
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
