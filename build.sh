@@ -136,7 +136,7 @@ git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-13
 git cherry-pick 20c6e5bde505ec73c9d9a3d3d299c9d9b758aca9
 cd ../../
     lunch ${TARGET}-userdebug
-    make -j$(nproc --all) systemimage
+    make -j6 systemimage
 
 
 
