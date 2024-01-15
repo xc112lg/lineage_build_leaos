@@ -6,7 +6,7 @@ echo ""
 rm -rf treble_experimentations lineage_patches_leaos 
 git clone https://github.com/iceows/treble_experimentations
 git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
-
+rm -rf frameworks/base
 if [ $# -lt 1 ]
 then
     echo "Not enough arguments - exiting"
