@@ -9,6 +9,9 @@ git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos
 rm -rf frameworks/base
 rm -rf packages/apps/Dialer
 rm -rf prebuilts/maven_repo/android
+rm -rf  frameworks/base/.git/index.lock
+rm -rf packages/apps/Dialer/.git/index.lock
+rm -rf prebuilts/maven_repo/android/.git/index.lock
 if [ $# -lt 1 ]
 then
     echo "Not enough arguments - exiting"
