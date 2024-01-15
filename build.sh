@@ -6,10 +6,10 @@ echo ""
 rm -rf treble_experimentations lineage_patches_leaos 
 git clone https://github.com/iceows/treble_experimentations
 git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
-rm -rf frameworks/base
-rm -rf packages/apps/Dialer
-rm -rf prebuilts/maven_repo/android
-rm -rf  frameworks/base/.git/index.lock
+rm -rf frameworks/base/
+rm -rf packages/apps/Dialer/
+rm -rf prebuilts/maven_repo/android/
+rm -rf frameworks/base/.git/index.lock
 rm -rf packages/apps/Dialer/.git/index.lock
 rm -rf prebuilts/maven_repo/android/.git/index.lock
 if [ $# -lt 1 ]
