@@ -131,10 +131,8 @@ build_treble() {
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 rm out/target/product/*/*.img
-cd frameworks/base/
-git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-16
-git cherry-pick 51ae929ed32baec14f439652435c4439193a8e30
-cd ../../
+rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
+mv PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
