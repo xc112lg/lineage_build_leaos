@@ -7,6 +7,7 @@ rm -rf treble_experimentations lineage_patches_leaos
 git clone https://github.com/iceows/treble_experimentations
 git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
 
+
 if [ $# -lt 1 ]
 then
     echo "Not enough arguments - exiting"
@@ -133,7 +134,7 @@ build_treble() {
 rm out/target/product/*/*.img
 cd frameworks/base/
 git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-13
-git cherry-pick 20c6e5bde505ec73c9d9a3d3d299c9d9b758aca9 e16823ee59e6fc46e8f7df19d8a02079fba0d69f
+git cherry-pick 20c6e5bde505ec73c9d9a3d3d299c9d9b758aca9 e16823ee59e6fc46e8f7df19d8a02079fba0d69f 866b5926551f757c0977d7cca000efa9d290ea4b 71cbc683f5f284d6687fa3d9f7f59555d2e1a199 c0e8ded93421cceb95c1c92c1bf4f2c269dbba66
 cd ../../
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
