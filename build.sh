@@ -132,7 +132,7 @@ build_treble() {
     esac
 rm out/target/product/*/*.img
 rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
-mv PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
+mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
