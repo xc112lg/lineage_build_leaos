@@ -133,7 +133,7 @@ build_treble() {
 rm out/target/product/*/*.img
 cd frameworks/base/
 git fetch https://github.com/xc112lg/android_frameworks_base-1.git patch-14
-git cherry-pick 8eb52ba78a3a4bf034a016b3c0851592df98f826
+git cherry-pick 0f258da7959fbbaf22474fb32b592647419625ea
 cd ../../
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
