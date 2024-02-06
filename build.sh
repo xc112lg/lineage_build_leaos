@@ -131,8 +131,8 @@ build_treble() {
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 rm out/target/product/*/*.img
-rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
-mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
+#rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
+#mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
