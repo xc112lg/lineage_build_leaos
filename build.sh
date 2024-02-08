@@ -4,6 +4,16 @@ echo "cRDOID 18.1 Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
 rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests
+
+rm -rf external/ImageMagick
+rm -rf external/grpc-grpc
+rm -rf external/clang
+rm -rf external/compiler-rt
+rm -rf external/python/parse_type
+rm -rf packages/modules/NetworkStack
+rm -rf external/mesa3d
+rm -rf system/apex
+
 git clone https://github.com/iceows/treble_experimentations
 git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
 
