@@ -51,9 +51,9 @@ prep_build() {
     
     if [ ${MODE} == "device" ]
     then
-       cp ./lineage_build_leaos/local_manifests_leaoss/*.xml .repo/local_manifests
+       cp -f ./lineage_build_leaos/local_manifests_leaoss/*.xml .repo/local_manifests
     else
-       cp ./lineage_build_leaos/local_manifests_leaos/*.xml .repo/local_manifests
+       cp -f ./lineage_build_leaos/local_manifests_leaos/*.xml .repo/local_manifests
     fi
     
     echo ""
