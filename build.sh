@@ -5,15 +5,11 @@ echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
 rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests
 
-rm -rf external/ImageMagick
-rm -rf external/grpc-grpc
-rm -rf external/clang
-rm -rf external/compiler-rt
-rm -rf external/python/parse_type
-rm -rf packages/modules/NetworkStack
-rm -rf external/mesa3d
-rm -rf system/apex
-rm -rf .repo/projects/external/python
+sudo apt-get update -y
+sudo apt-get install -y ccache
+export USE_CCACHE=1
+export CCACHE_EXEC=/usr/bin/ccache
+ccache -M 100G
 
 git clone https://github.com/iceows/treble_experimentations
 git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
