@@ -13,6 +13,7 @@ rm -rf external/python/parse_type
 rm -rf packages/modules/NetworkStack
 rm -rf external/mesa3d
 rm -rf system/apex
+rm -rf .repo/projects/external/python
 
 git clone https://github.com/iceows/treble_experimentations
 git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
