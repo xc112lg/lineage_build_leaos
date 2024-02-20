@@ -3,13 +3,9 @@ echo ""
 echo "cRDOID 18.1 Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests
+rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests .repo/manifests
+repo init  --depth 1 -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
 
-sudo apt-get update -y
-sudo apt-get install -y ccache
-export USE_CCACHE=1
-export CCACHE_EXEC=/usr/bin/ccache
-ccache -M 100G
 
 git clone https://github.com/iceows/treble_experimentations
 git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
