@@ -63,6 +63,7 @@ prep_build() {
     
     echo "Syncing repos"
     repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+    git clean -fdX
    
 echo ""
 
