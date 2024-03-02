@@ -63,7 +63,8 @@ prep_build() {
     
     echo "Syncing repos"
     repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
-    git clean -fdX
+    find . -type d -name ".git" -exec sh -c '(cd "{}" && echo "Cleaning untracked files in {}" && git clean -fdX)' \;
+    
    
 echo ""
 
