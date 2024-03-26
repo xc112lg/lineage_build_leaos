@@ -3,7 +3,7 @@ echo ""
 echo "cRDOID 18.1 Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests .repo *
+rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests
 repo init  --depth 1 -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
 
 
