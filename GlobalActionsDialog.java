@@ -651,10 +651,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         ShutDownAction shutdownAction = new ShutDownAction();
         RestartAction restartAction = new RestartAction();
         RestartSystemAction sysAction = new RestartSystemAction();
-        RestartRecoveryAction recAction = new RestartRecoveryAction();
-        RestartBootloaderAction blAction = new RestartBootloaderAction();
-        RestartDownloadAction dlAction = new RestartDownloadAction();
-        RestartFastbootAction fbAction = new RestartFastbootAction();
         ArraySet<String> addedKeys = new ArraySet<String>();
         ArraySet<String> addedRestartKeys = new ArraySet<String>();
         List<Action> tempActions = new ArrayList<>();
