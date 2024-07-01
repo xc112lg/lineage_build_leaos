@@ -3,7 +3,7 @@ echo ""
 echo "cRDOID 18.1 Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
-rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests
+rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests frameworks/base lineage-sdk
 repo init -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
 
 
@@ -138,9 +138,13 @@ rm out/target/product/*/*.img
 rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
 
+cd lineage-sdk
+sleep 1 &&git fetch https://github.com/xc112lg/android_lineage-sdk-1.git patch-1
+sleep 1 &&git cherry-pick ce6079d1f50d62c4c17de2e21760495428bf787f 
+cd ..
 
-rm frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialog.java
-mv lineage_build_leaos/GlobalActionsDialog.java frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions
+#rm frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialog.java
+#mv lineage_build_leaos/GlobalActionsDialog.java frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
