@@ -138,7 +138,7 @@ cd ..
     case "${1}" in
         ("64BVS") TARGET=treble_arm64_bvS;;
         ("64BVZ") TARGET=treble_arm64_bvZ;;
-        ("64BVN") TARGET=treble_arm64_bvN;;
+        ("64BVN") TARGET=treble_arm64_avZ;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 rm out/target/product/*/*.img
@@ -152,7 +152,10 @@ mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/androi
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
-
+   
+    
+    lunch treble_arm64_avZ-userdebug
+    make -j$(nproc --all) systemimage
 
 
 }
