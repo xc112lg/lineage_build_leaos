@@ -1098,27 +1098,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         }
     }
 
-    private final class RestartRecoveryAction extends SinglePressAction {
-        private RestartRecoveryAction() {
-            super(com.android.systemui.R.drawable.ic_lock_restart_recovery,
-                    com.android.systemui.R.string.global_action_restart_recovery);
-        }
 
-        @Override
-        public boolean showDuringKeyguard() {
-            return true;
-        }
-
-        @Override
-        public boolean showBeforeProvisioning() {
-            return true;
-        }
-
-        @Override
-        public void onPress() {
-            rebootAction(false, PowerManager.REBOOT_RECOVERY);
-        }
-    }
 
     private final class RestartBootloaderAction extends SinglePressAction {
         private RestartBootloaderAction() {
