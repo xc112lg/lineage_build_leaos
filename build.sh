@@ -128,6 +128,13 @@ build_device() {
 }
 
 build_treble() {
+
+
+cd lineage-sdk
+sleep 1 &&git fetch https://github.com/xc112lg/android_lineage-sdk-1.git patch-1
+sleep 1 &&git cherry-pick ce6079d1f50d62c4c17de2e21760495428bf787f 
+cd ..
+
     case "${1}" in
         ("64BVS") TARGET=treble_arm64_bvS;;
         ("64BVZ") TARGET=treble_arm64_bvZ;;
@@ -138,10 +145,7 @@ rm out/target/product/*/*.img
 rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
 
-cd lineage-sdk
-sleep 1 &&git fetch https://github.com/xc112lg/android_lineage-sdk-1.git patch-1
-sleep 1 &&git cherry-pick ce6079d1f50d62c4c17de2e21760495428bf787f 
-cd ..
+
 
 #rm frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialog.java
 #mv lineage_build_leaos/GlobalActionsDialog.java frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions
