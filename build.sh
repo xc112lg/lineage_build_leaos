@@ -9,7 +9,7 @@ repo init -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
 
 git clone https://github.com/iceows/treble_experimentations
 #git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
-git clone https://github.com/iceows/lineage_patches_leaos lineage_patches_leaos -b lineage-18.1
+git clone https://github.com/xc112lg/lineage_patches_leaoss lineage_patches_leaos
 
 if [ $# -lt 1 ]
 then
