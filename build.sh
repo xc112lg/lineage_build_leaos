@@ -5,7 +5,7 @@ echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
 rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests frameworks/base lineage-sdk
 #repo init -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
-
+repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --git-lfs
 
 git clone https://github.com/iceows/treble_experimentations
 #git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
