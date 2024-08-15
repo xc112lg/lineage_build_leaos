@@ -4,13 +4,13 @@ echo "cRDOID 18.1 Unified Buildbot - LeaOS version"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
 rm -rf treble_experimentations lineage_patches_leaos .repo/local_manifests frameworks/base lineage-sdk
-#repo init -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
-repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --git-lfs
+repo init -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
+#repo init -u https://github.com/LineageOS/android.git -b lineage-18.1 --git-lfs
 
 git clone https://github.com/iceows/treble_experimentations
-#git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
+git clone https://github.com/xc112lg/lineage_patches_leaos lineage_patches_leaos -b test
 #git clone https://github.com/xc112lg/lineage_patches_leaoss lineage_patches_leaos
-git clone https://github.com/iceows/lineage_patches_leaos lineage_patches_leaos -b lineage-18.1
+#git clone https://github.com/iceows/lineage_patches_leaos lineage_patches_leaos -b lineage-18.1
 if [ $# -lt 1 ]
 then
     echo "Not enough arguments - exiting"
@@ -147,10 +147,10 @@ rm out/target/product/*/*.img
 #mv lineage_build_leaos/config.mk vendor/addons/
 #rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 #mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
-cd frameworks/base
-sleep 1 &&git fetch https://github.com/xc112lg/android_frameworks_base.git patch-1
-sleep 1 &&git cherry-pick ff31cc43e514f3b57846d1cf221411fd08e9726e
-cd ../..
+# cd frameworks/base
+# sleep 1 &&git fetch https://github.com/xc112lg/android_frameworks_base.git patch-1
+# sleep 1 &&git cherry-pick ff31cc43e514f3b57846d1cf221411fd08e9726e
+# cd ../..
 
 
 #rm frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialog.java
@@ -160,13 +160,7 @@ cd ../..
     make -j$(nproc --all) systemimage
 
 
-    cd frameworks/base
-sleep 1 &&git fetch https://github.com/xc112lg/android_frameworks_base.git patch-1
-sleep 1 &&git cherry-pick ff31cc43e514f3b57846d1cf221411fd08e9726e
-cd ../..
 
-       make installclean
-    make -j$(nproc --all) systemimage
     
  #   lunch treble_arm64_avZ-userdebug
 #    make -j$(nproc --all) systemimage
