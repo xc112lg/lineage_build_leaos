@@ -140,6 +140,7 @@ cd ..
         ("64BVS") TARGET=treble_arm64_bvS;;
         ("64BVZ") TARGET=treble_arm64_bvZ;;
         ("64BVN") TARGET=treble_arm64_avZ;;
+	("64BOZ") TARGET=treble_arm64_aoZ;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 rm out/target/product/*/*.img
