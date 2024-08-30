@@ -157,9 +157,17 @@ rm out/target/product/*/*.img
 
 #rm frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialog.java
 #mv lineage_build_leaos/GlobalActionsDialog.java frameworks/base/packages/SystemUI/src/com/android/systemui/globalactions
-    # lunch ${TARGET}-userdebug
-    # make installclean
-    # make -j32 systemimage
+    lunch ${TARGET}-userdebug
+    make installclean
+    make -j32 systemimage
+
+
+    export GH_TOKEN=$(cat gh_token.txt)
+rm -rf Evolution-X
+sleep 1
+git clone https://$GH_TOKEN@github.com/xc112lg/Evolution-X
+chmod +x Evolution-X/c.sh
+. Evolution-X/c.sh
 
 
 
